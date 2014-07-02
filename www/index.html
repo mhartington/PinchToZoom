@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>Ionic App</title>
+
+  <link href="http://code.ionicframework.com/nightly/css/ionic.min.css" rel="stylesheet">
+  <style>
+    .slider {
+      height: 100%;
+    }
+    .slider-slide {
+      padding-top: 80px;
+      color: #000;
+      background-color: #fff;
+      text-align: center;
+      font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      font-weight: 300;
+    }
+    .details {
+      float: left;
+      font-size: 1em;
+      text-align: center;
+      padding: 2%;
+      background-color: #fff;
+    }
+    .image {
+      float: left;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: bottom left;
+    }
+    .responsive {
+      height: 275px;
+      width: 25%;
+      box-shadow: 0 0 0 5px white inset;
+    }
+    .gridRepeats:nth-child(4n+1) .details,
+    .gridRepeats:nth-child(4n+2) .details {
+      background-color: #9CD8D8;
+    }
+
+    .scroll-view{
+      position: absolute;
+      top:0;
+      bottom:0;
+      left:0;
+      right:0
+    }
+
+    .modal-img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+  </style>
+  <script src="http://code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+  <script src="cordova.js"></script>
+
+</head>
+
+<body ng-app="ionicApp" animation="slide-left-right-ios7" ng-controller="SlideController">
+
+
+  <ion-content style="top:0;background-color:#ffffff;" scroll="true" scrollbar-y="false">
+    <!-- start of grid -->
+    <div class="gridcontainer">
+      <ul>
+        <li class="gridRepeats" ng-repeat="grid in grids" ng-click="openModal(grid)">
+          <div class="image responsive" grid-image="{{grid.src}}"></div>
+
+        </li>
+      </ul>
+    </div>
+
+  </ion-content>
+
+  <script id="modal.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class = "bar bar-header bar-light" >
+      <h1 class="title"> 1961 </h1>
+      <button class="button button-clear button-primary" ng-click="closeModal()"><span class="icon ion-ios7-close-outline"></span > </button>
+    </ion-header-bar>
+      <ion-content class="padding" scroll="false">
+        <ion-scroll zooming="true" min-zoom="1"> 
+     <img class="modal-img" ng-src="{{data.selected.src}}" / >
+      </ion-scroll>
+      </ion-content>
+  </div>
+  </script>
+  <script>
+    angular.module('ionicApp', ['ionic'])
+
+    .controller('SlideController', function($scope, $ionicModal) {
+
+      $scope.data = {};
+      $scope.grids = [{
+        src: 'http://lorempixel.com/400/200/sports/1/',
+        details: 'George Feldenkreis leaves Cuba with one-year-old son, Oscar, a pregnant wife and only $700. Faced with the immediate need to earn a living, he begins importing everything from auto parts to apparel.'
+      }, {
+        src: 'http://lorempixel.com/400/200/sports/2/',
+        details: 'George travels to the Far East to develop key manufacturing relationships that pave the way for Supreme International, a business manufacturing school uniforms and 4-pocket linen Guayabera shirts that earns him the title: “King of Guayaberas.”'
+      }, {
+        src: 'http://lorempixel.com/400/200/sports/3/',
+        details: 'Oscar Feldenkreis joins the company, using his keen fashion sense to transition the business from a private label distributor to a branded sportswear manufacturer and distributor.'
+      }, {
+        src: 'http://lorempixel.com/400/200/sports/4/',
+        details: 'Launches its first major brand, Natural Issue®, specializing in reactive printing.'
+      }, {
+        src: 'http://lorempixel.com/400/200/sports/5/',
+        details: 'Initial public offering NASDAQ: SUPI.'
+      }, {
+        src: 'http://lorempixel.com/400/200/sports/6/',
+        color: "bluebg",
+        id: 6,
+        details: 'Acquisition of Munsingwear® and Grand Slam® brands adds 110 years of history and product innovation to the company’s heritage.'
+      }];
+
+      $ionicModal.fromTemplateUrl('modal.html', function(modal) {
+        $scope.gridModal = modal;
+      }, {
+        scope: $scope,
+        animation: 'slide-in-up'
+      });
+      // open video modal
+      $scope.openModal = function(selected) {
+        $scope.data.selected = selected;
+        $scope.gridModal.show();
+      };
+      // close video modal
+      $scope.closeModal = function() {
+        $scope.gridModal.hide();
+      };
+      //Cleanup the video modal when we're done with it!
+      $scope.$on('$destroy', function() {
+        $scope.gridModal.remove();
+      });
+    })
+
+    .directive('gridImage', function() {
+      return function($scope, element, attrs) {
+        var url = attrs.gridImage;
+        element.css({
+          'background-image': 'url(' + url + ')',
+        });
+      };
+    });
+  </script>
+
+</body>
+
+</html>

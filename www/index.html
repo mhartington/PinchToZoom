@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
@@ -15,25 +16,8 @@
 <body ng-app="starter" ng-controller="MainCtrl">
 
   <ion-content>
-    <img  ng-repeat="grid in grids" ng-click="openModal(grid)" ng-src="{{grid.src}}">
+    <img ng-repeat="grid in grids" ng-click="openModal(grid)" ng-src="{{grid.src}}">
   </ion-content>
-
-  <script id="modal.html" type="text/ng-template">
-	<ion-modal-view >
-		<ion-header-bar class="bar-light animate" ng-hide="hide.bars" >
-      <button class="button button-clear button-primary" ng-click="closeModal()">
-			  <span class="icon ion-ios7-close-outline"></span > 
-	 		</button>
-    </ion-header-bar>
-       <ion-scroll direction="xy" locking="false" zooming="true" min-zoom="1" on-tap="hide.bars = !hide.bars" 
-                   class="animate modal-content" 
-                 ng-class="hide.bars ? 'content-dark full' : 'content-light has-header has-footer'">          
-     	  <img class="modal-img" ng-src="{{data.selected.src}}" />
-        {{show.header}}
-       </ion-scroll>
-    </ion-content>
-    <ion-footer-bar class="bar-light animate" ng-hide="hide.bars" ></ion-footer-bar>
-	</ion-modal-view>
-  </script>
 </body>
+
 </html>

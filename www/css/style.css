@@ -1,36 +1,34 @@
 /* Empty. Add your own CSS if you like */
-img{
-  display:block;
-  width:100%;
-  height:auto;
-}
 
-.animate{
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.animate {
   -webkit-transition: all .15s linear;
   transition: all .15s linear;
 }
-
-.bar.animate.ng-hide{
-  opacity:0;
+.bar.animate.ng-hide {
+  opacity: 0;
 }
-.content-light{
-background-color:white;
+.content-light {
+  background-color: white;
 }
-
-.content-darki,.modal{
-  background-color:black;
+.content-dark {
+  background-color: black;
 }
-.full{
-  top:1px;
-  bottom:0
+.full {
+  top: 1px;
+  bottom: 0
 }
-.scroll-view{
-  position:absolute;
-  width:100%;
+.scroll-view {
+  position: absolute;
+  width: 100%;
 }
-.scroll-view .scroll{
-  min-height:100%;i
-  display: -webkit-box;
+.scroll-view .scroll {
+  min-height: 100%;
+  i display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -58,6 +56,11 @@ background-color:white;
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-
-
+}
+.slider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
